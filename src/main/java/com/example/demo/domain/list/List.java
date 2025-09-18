@@ -23,16 +23,12 @@ import java.util.UUID;
 @Accessors(chain = true)
 public class List extends AbstractEntity {
 
-    public List(UUID id) {
-        super(id);
-    }
-
     @Column(nullable = false, length = 254)
     @NotBlank(message = "Title cannot be empty")
     @Length(max = 254, message = "The title can't be longer than 254 characters")
     private String title;
 
-    @OneToMany(mappedBy = "list_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "listId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ListElement> listElements;
 
     public List(UUID id, String title, Set<ListElement> listElements) {
