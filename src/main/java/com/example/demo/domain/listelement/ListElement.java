@@ -1,17 +1,19 @@
 package com.example.demo.domain.listelement;
 
 import com.example.demo.core.generic.AbstractEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import com.example.demo.domain.list.List;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.antlr.v4.runtime.misc.NotNull;
+import lombok.extern.log4j.Log4j2;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
+@Log4j2
 @Entity
 @Table(name = "list_element")
 @NoArgsConstructor
@@ -26,17 +28,14 @@ public class ListElement extends AbstractEntity {
 
     @Column (name = "importance", nullable = false)
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Importance importance;
 
     @Column(name = "creation_date", nullable = false)
-    @NotNull
     private LocalDate creationDate;
 
     @JoinColumn(name = "list_id", nullable = false)
     @ManyToOne
-    @NotNull
-    private Account list_id;
+    private List listId;
 
     public ListElement(UUID id, String text, Importance importance, LocalDate creationDate) {
         super(id);

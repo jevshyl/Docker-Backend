@@ -1,17 +1,20 @@
 package com.example.demo.domain.list;
 
 import com.example.demo.core.generic.AbstractEntity;
-import com.example.demo.domain.listelement.dto.ListElementMapperImpl;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.example.demo.domain.listelement.ListElement;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Set;
 import java.util.UUID;
 
+@Log4j2
 @Entity
 @Table(name = "list")
 @NoArgsConstructor
@@ -29,10 +32,10 @@ public class List extends AbstractEntity {
     @Length(max = 254, message = "The title can't be longer than 254 characters")
     private String title;
 
-    @OneToMany(mappedBy = "list_elements", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "list_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ListElement> listElements;
 
-    public List(UUID id, String title, List<ListElement> listElements) {
+    public List(UUID id, String title, Set<ListElement> listElements) {
         super(id);
         this.title = title;
         this.listElements = listElements;
