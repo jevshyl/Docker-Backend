@@ -1,7 +1,7 @@
 package com.example.demo.domain.listelement;
 
 import com.example.demo.core.generic.AbstractEntity;
-import com.example.demo.domain.list.List;
+import com.example.demo.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.validator.constraints.Length;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -40,7 +39,7 @@ public class ListElement extends AbstractEntity {
 
     @JoinColumn(name = "list_id", nullable = false)
     @ManyToOne
-    private List list;
+    private User owner;
 
     public ListElement(UUID id, String title, String text, Importance importance, LocalDate creationDate) {
         super(id);

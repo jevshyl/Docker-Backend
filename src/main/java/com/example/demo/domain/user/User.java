@@ -1,12 +1,11 @@
 package com.example.demo.domain.user;
 
 import com.example.demo.core.generic.AbstractEntity;
-import com.example.demo.domain.list.List;
+import com.example.demo.domain.listelement.ListElement;
 import com.example.demo.domain.role.Role;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +37,8 @@ public class User extends AbstractEntity {
              inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
   private Set<Role> roles = new HashSet<>();
 
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private List list;
+  @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  private Set<ListElement> listElements = new HashSet<>();
 
   public User(UUID id, String firstName, String lastName, String email, String password, Set<Role> roles) {
     super(id);
@@ -49,5 +48,4 @@ public class User extends AbstractEntity {
     this.password = password;
     this.roles = roles;
   }
-
 }

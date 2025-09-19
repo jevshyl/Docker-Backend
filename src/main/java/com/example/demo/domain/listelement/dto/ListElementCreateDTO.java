@@ -27,13 +27,13 @@ public class ListElementCreateDTO extends AbstractDTO {
     private Importance importance;
 
     @NotNull
-    private UUID listId;
+    private UUID userId;
 
-    public ListElementCreateDTO(UUID id, String title, String text, Importance importance, UUID listId) {
+    public ListElementCreateDTO(UUID id, String title, String text, Importance importance, UUID userId) {
         super(id);
         this.title = title;
         this.text = text;
         this.importance = importance;
-        this.listId = listId;
+        this.userId = userId;
     }
 }
