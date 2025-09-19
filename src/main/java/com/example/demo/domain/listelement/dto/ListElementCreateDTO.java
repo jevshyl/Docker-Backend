@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ListElementDTO extends AbstractDTO {
+public class ListElementCreateDTO extends AbstractDTO {
     @Column(name = "text", nullable = false)
     @NotBlank(message = "The list element cannot be empty")
     private String text;
@@ -26,17 +26,13 @@ public class ListElementDTO extends AbstractDTO {
     @Enumerated(EnumType.STRING)
     private Importance importance;
 
-    @Column(name = "creation_date", nullable = false)
-    private LocalDate creationDate;
-
     @JoinColumn(name = "list_id", nullable = false)
     @ManyToOne
     private List listId;
 
-    public ListElementDTO(UUID id, String text, Importance importance, LocalDate creationDate) {
+    public ListElementCreateDTO(UUID id, String text, Importance importance) {
         super(id);
         this.text = text;
         this.importance = importance;
-        this.creationDate = creationDate;
     }
 }
