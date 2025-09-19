@@ -9,16 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
-
-import java.time.LocalDate;
 import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ListElementDTO extends AbstractDTO {
-
+public class ListElementCreateDTO extends AbstractDTO {
     @NotBlank(message = "The title element cannot be empty")
     @Length(max = 254, message = "The title can't be longer than 254 characters")
     private String title;
@@ -30,13 +27,13 @@ public class ListElementDTO extends AbstractDTO {
     private Importance importance;
 
     @NotNull
-    private LocalDate creationDate;
+    private UUID listId;
 
-    public ListElementDTO(UUID id, String title, String text, Importance importance, LocalDate creationDate) {
+    public ListElementCreateDTO(UUID id, String title, String text, Importance importance, UUID listId) {
         super(id);
         this.title = title;
         this.text = text;
         this.importance = importance;
-        this.creationDate = creationDate;
+        this.listId = listId;
     }
 }

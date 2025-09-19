@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,13 +30,27 @@ public class List extends AbstractEntity {
     @Length(max = 254, message = "The title can't be longer than 254 characters")
     private String title;
 
-    @OneToMany(mappedBy = "listId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<ListElement> listElements;
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ListElement> listElements = new HashSet<>();
 
     public List(UUID id, String title, Set<ListElement> listElements) {
         super(id);
         this.title = title;
-        this.listElements = listElements;
+        if (listElements != null) {
+            listElements.forEach(this::addElement); // stellt die bidirektionale Konsistenz her
+        }
+    }
+
+    public List addElement(ListElement listElement) {
+        listElements.add(listElement);
+        listElement.setList(this);
+        return this;
+    }
+
+    public List removeElement(ListElement listElement) {
+        listElements.remove(listElement);
+        listElement.setList(null);
+        return this;
     }
 
     @OneToOne
@@ -44,6 +59,6 @@ public class List extends AbstractEntity {
 
     @PostPersist
     public void logNewUserAdded(){
-        log.info("Created list '" + title + "' with ID: " + super.getId());
+        log.info("Created list '{}' with ID: {}", title, super.getId());
     }
 }
