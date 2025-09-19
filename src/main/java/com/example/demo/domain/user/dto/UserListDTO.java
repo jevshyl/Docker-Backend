@@ -1,8 +1,7 @@
-package com.example.demo.domain.list.dto;
+package com.example.demo.domain.user.dto;
 
 import com.example.demo.core.generic.AbstractDTO;
 import com.example.demo.domain.role.dto.RoleDTO;
-import com.example.demo.domain.user.dto.UserListDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -17,15 +16,16 @@ import java.util.UUID;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ListDTO extends AbstractDTO {
+public class UserListDTO extends AbstractDTO {
 
-    private String title;
-    private UserListDTO userListDTO;
+  private String firstName;
 
-    public ListDTO(UUID id, String title, UserListDTO userListDTO) {
-        super(id);
-        this.title = title;
-        this.userListDTO = userListDTO;
-    }
+  private String lastName;
+
+  public UserListDTO(UUID id, String firstName, String lastName) {
+    super(id);
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
 }

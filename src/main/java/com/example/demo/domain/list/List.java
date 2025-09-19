@@ -2,6 +2,7 @@ package com.example.demo.domain.list;
 
 import com.example.demo.core.generic.AbstractEntity;
 import com.example.demo.domain.listelement.ListElement;
+import com.example.demo.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -36,6 +37,10 @@ public class List extends AbstractEntity {
         this.title = title;
         this.listElements = listElements;
     }
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @PostPersist
     public void logNewUserAdded(){
