@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -21,6 +22,10 @@ import java.util.UUID;
 @Setter
 @Accessors(chain = true)
 public class ListElement extends AbstractEntity {
+    @Column(name = "title", nullable = false)
+    @NotBlank(message = "The title element cannot be empty")
+    @Length(max = 254, message = "The title can't be longer than 254 characters")
+    private String title;
 
     @Column(name = "text", nullable = false)
     @NotBlank(message = "The list element cannot be empty")
@@ -35,10 +40,11 @@ public class ListElement extends AbstractEntity {
 
     @JoinColumn(name = "list_id", nullable = false)
     @ManyToOne
-    private List listId;
+    private List list;
 
-    public ListElement(UUID id, String text, Importance importance, LocalDate creationDate) {
+    public ListElement(UUID id, String title, String text, Importance importance, LocalDate creationDate) {
         super(id);
+        this.title = title;
         this.text = text;
         this.importance = importance;
         this.creationDate = creationDate;
@@ -46,6 +52,6 @@ public class ListElement extends AbstractEntity {
 
     @PostPersist
     public void logNewUserAdded(){
-        log.info("Created list element '" + text + "' with ID: " + super.getId());
+        log.info("Created list element '{}' with ID: {}", text, super.getId());
     }
 }
