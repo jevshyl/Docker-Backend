@@ -37,7 +37,7 @@ public class ListElement extends AbstractEntity {
     @Column(name = "creation_date", nullable = false)
     private LocalDate creationDate;
 
-    @JoinColumn(name = "list_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne
     private User owner;
 
