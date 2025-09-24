@@ -6,6 +6,7 @@ import com.example.demo.domain.user.dto.UserRegisterDTO;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.demo.domain.user.dto.UserUpdateDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,8 @@ public class UserController {
   @PutMapping("/{id}")
   @Operation(summary = "Update a user by id", description = "Update a certain user by id")
   @PreAuthorize("hasAuthority('USER_MODIFY') && @userPermissionEvaluator.exampleEvaluator(authentication.principal.user,#id)")
-  public ResponseEntity<UserDTO> updateById(@PathVariable UUID id, @Valid @RequestBody UserDTO userDTO) {
-    User user = userService.updateById(id, userMapper.fromDTO(userDTO));
+  public ResponseEntity<UserDTO> updateById(@PathVariable UUID id, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
+    User user = userService.updateById(id, userMapper.fromUserUpdateDTO(userUpdateDTO));
     return new ResponseEntity<>(userMapper.toDTO(user), HttpStatus.OK);
   }
 
