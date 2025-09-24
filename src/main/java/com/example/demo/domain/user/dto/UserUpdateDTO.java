@@ -1,18 +1,22 @@
 package com.example.demo.domain.user.dto;
 
 import com.example.demo.core.generic.AbstractDTO;
-import java.util.UUID;
+import com.example.demo.domain.role.dto.RoleDTO;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.Set;
+import java.util.UUID;
+
 @NoArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserRegisterDTO extends AbstractDTO {
+public class UserUpdateDTO extends AbstractDTO {
 
   private String firstName;
 
@@ -21,13 +25,14 @@ public class UserRegisterDTO extends AbstractDTO {
   @Email
   private String email;
 
-  private String password;
+  @Valid
+  private Set<RoleDTO> roles;
 
-  public UserRegisterDTO(UUID id, String firstName, String lastName, String email, String password) {
+  public UserUpdateDTO(UUID id, String firstName, String lastName, String email, Set<RoleDTO> roles) {
     super(id);
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.password = password;
+    this.roles = roles;
   }
 }
