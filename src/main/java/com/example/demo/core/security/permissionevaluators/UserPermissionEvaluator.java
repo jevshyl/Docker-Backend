@@ -10,9 +10,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UserPermissionEvaluator {
 
-  public boolean exampleEvaluator(User principal, UUID id) {
-    //your code here
-    return true;
-  }
-
+    // todo: remove
+    public boolean exampleEvaluator(User principal, UUID id) {
+        return true;
+    }
 }
