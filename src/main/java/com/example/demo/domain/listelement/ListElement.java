@@ -41,12 +41,12 @@ public class ListElement extends AbstractEntity {
     @ManyToOne
     private User owner;
 
-    public ListElement(UUID id, String title, String text, Importance importance, LocalDate creationDate) {
+    public ListElement(UUID id, String title, String text, Importance importance) {
         super(id);
         this.title = title;
         this.text = text;
         this.importance = importance;
-        this.creationDate = creationDate;
+        this.creationDate = LocalDate.now();
     }
 
     @PostPersist
