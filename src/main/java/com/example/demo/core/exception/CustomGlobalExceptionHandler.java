@@ -1,6 +1,7 @@
 package com.example.demo.core.exception;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +55,16 @@ public class CustomGlobalExceptionHandler {
                               .build();
   }
 
+  @ExceptionHandler({AccessDeniedException.class})
+  @ResponseStatus(value =  HttpStatus.FORBIDDEN)
+  public ResponseError handleAccessDeniedException(Throwable e) {
+      Map<String, String> errors = new HashMap<>();
+      errors.put("accessDeniedException", e.getMessage());
+      return new ResponseError().setTimeStamp(LocalDate.now())
+              .setErrors(errors)
+              .build();
+  }
+
   @ExceptionHandler({HttpMessageNotReadableException.class})
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ResponseError handleHttp(Throwable e) {
@@ -84,7 +95,4 @@ public class CustomGlobalExceptionHandler {
                               .setErrors(errors)
                               .build();
   }
-
 }
-
-

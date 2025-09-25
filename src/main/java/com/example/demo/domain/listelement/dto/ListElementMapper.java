@@ -17,7 +17,9 @@ public interface ListElementMapper extends AbstractMapper<ListElement, ListEleme
     ListElementDTO toDTO(ListElement listElement);
 
     default User map(UUID id) {
-        if (id == null) return null; // todo: exception handling
+        if (id == null) {
+            throw new IllegalArgumentException("UserId darf nicht null sein");
+        }
         User user = new User();
         user.setId(id);
         return user;
