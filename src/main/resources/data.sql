@@ -2,7 +2,8 @@
 --you can use gen_random_uuid () to generate random IDs, use this only to generate testdata
 insert into users (id, email,first_name,last_name, password)
 values ('ba804cb9-fa14-42a5-afaf-be488742fc54', 'admin@example.com', 'James','Bond', '$2a$10$TM3PAYG3b.H98cbRrHqWa.BM7YyCqV92e/kUTBfj85AjayxGZU7d6'), -- Password: 1234 | Roles: Admin & Default
-       ('0d8fa44c-54fd-4cd0-ace9-2a7da57992de', 'user@example.com', 'Tyler','Durden', '$2a$10$TM3PAYG3b.H98cbRrHqWa.BM7YyCqV92e/kUTBfj85AjayxGZU7d6') -- Password: 1234 |  Roles: User & Default
+       ('0d8fa44c-54fd-4cd0-ace9-2a7da57992de', 'user@example.com', 'Tyler','Durden', '$2a$10$TM3PAYG3b.H98cbRrHqWa.BM7YyCqV92e/kUTBfj85AjayxGZU7d6'), -- Password: 1234 |  Roles: User & Default
+       ('ad8fa44c-54fd-4cd0-ac19-2a7da57992de', 'seconduser@example.com', 'Jonas','Eimann', '$2a$10$TM3PAYG3b.H98cbRrHqWa.BM7YyCqV92e/kUTBfj85AjayxGZU7d6') -- Password: 1234 |  Roles: User & Default
 ON CONFLICT DO NOTHING;
 
 
@@ -19,7 +20,6 @@ INSERT INTO authority(id, name)
 VALUES ('2ebf301e-6c61-4076-98e3-2a38b31daf86', 'DEFAULT'),
        ('76d2cbf6-5845-470e-ad5f-2edb9e09a868', 'USER_MODIFY'),
        ('21c942db-a275-43f8-bdd6-d048c21bf5ab', 'USER_DEACTIVATE'),
-       ('37e2df45-2f79-41aa-b0c5-d3a87a4cf81a', 'LIST_ELEMENT_VIEW'),
        ('c3a1d4d9-7e08-4e89-8f94-5a63f67f2a9a', 'LIST_ELEMENT_CREATE'),
        ('6b8e3a27-7cfa-4c5c-87f0-46e8a5d907ef', 'LIST_ELEMENT_DELETE'),
        ('4f91c2b0-ff93-49d6-aef0-81ab47bb3fa2', 'LIST_ELEMENT_MODIFY')
@@ -30,16 +30,17 @@ ON CONFLICT DO NOTHING;
 insert into users_role (users_id, role_id)
 values ('ba804cb9-fa14-42a5-afaf-be488742fc54', 'd29e709c-0ff1-4f4c-a7ef-09f656c390f1'),
        ('0d8fa44c-54fd-4cd0-ace9-2a7da57992de', 'd29e709c-0ff1-4f4c-a7ef-09f656c390f1'),
+       ('ad8fa44c-54fd-4cd0-ac19-2a7da57992de', 'd29e709c-0ff1-4f4c-a7ef-09f656c390f1'),
        ('ba804cb9-fa14-42a5-afaf-be488742fc54', 'ab505c92-7280-49fd-a7de-258e618df074'),
-       ('0d8fa44c-54fd-4cd0-ace9-2a7da57992de', 'c6aee32d-8c35-4481-8b3e-a876a39b0c02')
+       ('0d8fa44c-54fd-4cd0-ace9-2a7da57992de', 'c6aee32d-8c35-4481-8b3e-a876a39b0c02'),
+       ('ad8fa44c-54fd-4cd0-ac19-2a7da57992de', 'c6aee32d-8c35-4481-8b3e-a876a39b0c02')
  ON CONFLICT DO NOTHING;
 
 
 --ASSIGN AUTHORITIES TO ROLES
 --default role
 INSERT INTO role_authority(role_id, authority_id)
-VALUES ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '2ebf301e-6c61-4076-98e3-2a38b31daf86'),
-       ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '37e2df45-2f79-41aa-b0c5-d3a87a4cf81a')
+VALUES ('d29e709c-0ff1-4f4c-a7ef-09f656c390f1', '2ebf301e-6c61-4076-98e3-2a38b31daf86')
 ON CONFLICT DO NOTHING;
 -- admin role
 INSERT INTO role_authority(role_id, authority_id)
@@ -64,5 +65,7 @@ VALUES ('9a6f47b4-70b7-42f8-874b-6eb9e5d1d32f', 'Talk with Bobby', 'I want to ta
        ('45f1c7b1-30b6-4a2d-98f6-8fa3fbc15a5c', 'Learn sewing', 'A big dream of mine, wich i now wanna pursue in the holidays.', 'LOW', '2025-09-22', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'),
        ('f0c3b7a2-ec58-4b48-8e7c-415f9f88951a', 'Cook 5 star dinner', 'For my Family and friends.', 'MEDIUM', '2025-09-20', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'),
        ('b9c8d57a-7a2e-4f9d-87e3-2cbb84fa5de4', 'Do math homework', 'Pages 12 - 14.', 'HIGH', '2025-08-02', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'),
-       ('12f4c8d3-9e5b-41a4-b84d-12db48c28f5e', 'Go jogging', 'Get that body tea.', 'MEDIUM', '2025-09-24', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de')
+       ('12f4c8d3-9e5b-41a4-b84d-12db48c28f5e', 'Go jogging', 'Get that body tea.', 'MEDIUM', '2025-09-24', '0d8fa44c-54fd-4cd0-ace9-2a7da57992de'),
+       ('f0c3b7a2-ec58-4b48-8e7c-41119f88951a', 'Cook 3 star dinner', 'For my work environment.', 'MEDIUM', '2025-09-20', 'ad8fa44c-54fd-4cd0-ac19-2a7da57992de'),
+       ('b9c8d57a-7a2e-4f9d-87e3-222b84fa5de4', 'Do german homework', 'Exercises 2 to 4.', 'LOW', '2025-03-02', 'ad8fa44c-54fd-4cd0-ac19-2a7da57992de')
 ON CONFLICT DO NOTHING;

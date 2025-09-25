@@ -39,7 +39,7 @@ public class UserController {
 
   @GetMapping("/{id}")
   @Operation(summary = "Show a user by id", description = "Find and show a user by id")
-  // todo
+  @PreAuthorize("isAuthenticated()")
   public ResponseEntity<UserDTO> retrieveById(@PathVariable UUID id) {
     User user = userService.findById(id);
     return new ResponseEntity<>(userMapper.toDTO(user), HttpStatus.OK);
@@ -47,7 +47,7 @@ public class UserController {
 
   @GetMapping({"", "/"})
   @Operation(summary = "Show all users", description = "Show all existing users")
-  // todo
+  @PreAuthorize("isAuthenticated()")
   public ResponseEntity<List<UserDTO>> retrieveAll() {
     List<User> users = userService.findAll();
     return new ResponseEntity<>(userMapper.toDTOs(users), HttpStatus.OK);
@@ -67,7 +67,7 @@ public class UserController {
   }
   @PutMapping("/{id}")
   @Operation(summary = "Update a user by id", description = "Update a certain user by id")
-  @PreAuthorize("hasAuthority('USER_MODIFY') && @userPermissionEvaluator.exampleEvaluator(authentication.principal.user,#id)") // todo
+  @PreAuthorize("hasAuthority('USER_MODIFY')")
   public ResponseEntity<UserDTO> updateById(@PathVariable UUID id, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
     User user = userService.updateById(id, userMapper.fromUserUpdateDTO(userUpdateDTO));
     return new ResponseEntity<>(userMapper.toDTO(user), HttpStatus.OK);
@@ -75,7 +75,7 @@ public class UserController {
 
   @DeleteMapping("/{id}")
   @Operation(summary = "Delete a user", description = "Delete a certain user by id")
-  @PreAuthorize("hasAuthority('USER_DELETE')") // todo
+  @PreAuthorize("hasAuthority('USER_DEACTIVATE')")
   public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
     userService.deleteById(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Component("ListElementPermissionEvaluator")
+@Component("listElementPermissionEvaluator")
 @RequiredArgsConstructor
 public class ListElementPermissionEvaluator {
 
@@ -20,12 +20,18 @@ public class ListElementPermissionEvaluator {
     }
 
     public boolean isNotOwner(User principal, UUID elementId) {
-        return listElementRepository.findById(elementId)
-                .map(listElement -> !listElement.getOwner().getId().equals(principal.getId()))
-                .orElse(false);
+        return !isOwner(principal, elementId);
     }
 
     public boolean canCreate(User principal, UUID targetUserId) {
         return targetUserId != null && targetUserId.equals(principal.getId());
+    }
+
+    public boolean hasRole(User principal, String roleName) {
+        if (principal == null || roleName == null) {
+            return false;
+        }
+        return principal.getRoles().stream()
+                .anyMatch(role -> roleName.equalsIgnoreCase(role.getName()));
     }
 }

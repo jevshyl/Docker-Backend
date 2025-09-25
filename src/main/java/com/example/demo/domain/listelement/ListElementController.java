@@ -38,23 +38,15 @@ public class ListElementController {
 
   @PostMapping()
   @Operation(summary = "Create list element", description = "Creates a new list element in a existing list")
-  @PreAuthorize("""
-    hasAuthority('LIST_ELEMENT_CREATE')
-    and @ListElementPermissionEvaluator.canCreate(#listElementCreateDTO.userId, authentication.principal.user)
-  """)
+  @PreAuthorize("hasAuthority('LIST_ELEMENT_CREATE') && @listElementPermissionEvaluator.canCreate(authentication.principal.user, #listElementCreateDTO.getUserId())")
   public ResponseEntity<ListElementDTO> create(@Valid @RequestBody ListElementCreateDTO listElementCreateDTO) {
-      ListElement listElement = listElementService.create(listElementMapper.fromListElementCreateDTO(listElementCreateDTO));
+      ListElement listElement = listElementService.save(listElementMapper.fromListElementCreateDTO(listElementCreateDTO));
       return new ResponseEntity<>(listElementMapper.toDTO(listElement), HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")
   @Operation(summary = "Update a list element", description = "Finds and updates a certain list element by id")
-  @PreAuthorize("""
-    hasAuthority('LIST_ELEMENT_MODIFY') and (
-      (hasRole('USER')  and @ListElementPermissionEvaluator.isOwner(#id, authentication.principal.user)) or
-      (hasRole('ADMIN') and @ListElementPermissionEvaluator.isNotOwner(#id, authentication.principal.user))
-    )
-  """)
+  @PreAuthorize("hasAuthority('LIST_ELEMENT_MODIFY') and (@listElementPermissionEvaluator.hasRole(authentication.principal.user,'USER') and @listElementPermissionEvaluator.isOwner(authentication.principal.user, #id)) or (@listElementPermissionEvaluator.hasRole(authentication.principal.user,'ADMIN') and @listElementPermissionEvaluator.isNotOwner(authentication.principal.user, #id))")
   public ResponseEntity<ListElementDTO> updateById(@PathVariable UUID id, @Valid @RequestBody ListElementDTO listElementDTO) {
       ListElement listElement = listElementService.updateById(id, listElementMapper.fromDTO(listElementDTO));
       return new ResponseEntity<>(listElementMapper.toDTO(listElement), HttpStatus.OK);
@@ -63,12 +55,7 @@ public class ListElementController {
 
   @DeleteMapping("/{id}")
   @Operation(summary = "Delete a list element", description = "Finds and deletes a certain list element by id")
-  @PreAuthorize("""
-    hasAuthority('LIST_ELEMENT_DELETE') and (
-      (hasRole('USER')  and @ListElementPermissionEvaluator.isOwner(#id, authentication.principal.user)) or
-      (hasRole('ADMIN') and @ListElementPermissionEvaluator.isNotOwner(#id, authentication.principal.user))
-    )
-  """)
+  @PreAuthorize("hasAuthority('LIST_ELEMENT_DELETE') and (@listElementPermissionEvaluator.hasRole(authentication.principal.user,'USER') and @listElementPermissionEvaluator.isOwner(authentication.principal.user, #id)) or (@listElementPermissionEvaluator.hasRole(authentication.principal.user,'ADMIN') and @listElementPermissionEvaluator.isNotOwner(authentication.principal.user, #id))")
   public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
       listElementService.deleteById(id);
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);

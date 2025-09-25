@@ -11,7 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -48,4 +50,14 @@ public class User extends AbstractEntity {
     this.password = password;
     this.roles = roles;
   }
+
+    @PostPersist
+    public void logNewUserAdded(){
+        log.info("Created user '{} {}' with ID: {}", firstName, lastName, super.getId());
+    }
+
+    @PrePersist
+    public void prePersist(){
+        log.info("Attempting to create user '{} {}' with ID: {}", firstName, lastName, super.getId());
+    }
 }

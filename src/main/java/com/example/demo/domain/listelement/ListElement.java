@@ -46,11 +46,16 @@ public class ListElement extends AbstractEntity {
         this.title = title;
         this.text = text;
         this.importance = importance;
-        this.creationDate = LocalDate.now();
     }
 
     @PostPersist
     public void logNewUserAdded(){
         log.info("Created list element '{}' with ID: {}", text, super.getId());
+    }
+
+    @PrePersist
+    public void prePersist(){
+        if (creationDate == null) creationDate = java.time.LocalDate.now();
+        log.info("Attempting to create list element '{}' with ID: {}", text, super.getId());
     }
 }

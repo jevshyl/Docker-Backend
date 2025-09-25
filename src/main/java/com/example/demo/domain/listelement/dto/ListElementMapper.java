@@ -11,10 +11,9 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ListElementMapper extends AbstractMapper<ListElement, ListElementDTO> {
-    @Mapping(target = "owner", source = "userId") // UUID -> List
+    @Mapping(target = "owner", source = "userId")
     ListElement fromListElementCreateDTO(@Valid ListElementCreateDTO listElementCreateDTO);
 
-    @Mapping(target = "id", source = "owner.id")
     ListElementDTO toDTO(ListElement listElement);
 
     default User map(UUID id) {
