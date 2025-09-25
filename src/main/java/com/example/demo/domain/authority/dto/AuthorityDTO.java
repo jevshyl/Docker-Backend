@@ -14,7 +14,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class AuthorityDTO extends AbstractDTO {
-
   @NotNull
   @Size(min = 1, max = 255)
   private String name;
@@ -23,5 +22,4 @@ public class AuthorityDTO extends AbstractDTO {
     super(id);
     this.name = name;
   }
-
 }

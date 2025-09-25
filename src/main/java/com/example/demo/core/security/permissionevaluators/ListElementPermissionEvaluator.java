@@ -10,7 +10,6 @@ import java.util.UUID;
 @Component("listElementPermissionEvaluator")
 @RequiredArgsConstructor
 public class ListElementPermissionEvaluator {
-
     private final ListElementRepository listElementRepository;
 
     public boolean isOwner(User principal, UUID elementId) {

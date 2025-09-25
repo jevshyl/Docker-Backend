@@ -19,4 +19,3 @@ public @interface Link {
 
   Class<? extends Payload>[] payload() default {};
 }
-

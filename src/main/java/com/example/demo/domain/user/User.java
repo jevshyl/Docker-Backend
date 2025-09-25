@@ -21,7 +21,6 @@ import lombok.extern.log4j.Log4j2;
 @Setter
 @Accessors(chain = true)
 public class User extends AbstractEntity {
-
   @Column(name = "first_name")
   private String firstName;
 

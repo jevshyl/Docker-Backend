@@ -14,5 +14,4 @@ import java.util.UUID;
 public abstract class AbstractDTO {
 
   private UUID id;
-
 }

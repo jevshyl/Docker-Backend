@@ -17,7 +17,6 @@ import java.util.UUID;
 @Setter
 @Accessors(chain = true)
 public class UserUpdateDTO extends AbstractDTO {
-
   private String firstName;
 
   private String lastName;

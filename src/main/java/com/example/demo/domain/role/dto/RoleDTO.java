@@ -18,7 +18,6 @@ import java.util.UUID;
 @Getter
 @Accessors(chain = true)
 public class RoleDTO extends AbstractDTO {
-
   @NotNull
   @Size(min = 1, max = 255)
   private String name;
@@ -31,5 +30,4 @@ public class RoleDTO extends AbstractDTO {
     this.name = name;
     this.authorities = authorities;
   }
-
 }

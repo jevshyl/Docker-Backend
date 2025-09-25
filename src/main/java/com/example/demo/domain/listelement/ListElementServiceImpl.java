@@ -16,7 +16,6 @@ import java.util.UUID;
 @Getter@Setter
 @Service
 public class ListElementServiceImpl extends AbstractServiceImpl<ListElement> implements ListElementService {
-
     private final UserDetailsService userDetailsService;
 
     public ListElementServiceImpl(ListElementRepository repository, @Lazy @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {

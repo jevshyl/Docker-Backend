@@ -6,7 +6,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public record UserDetailsImpl(User user) implements UserDetails {
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return user.getRoles()

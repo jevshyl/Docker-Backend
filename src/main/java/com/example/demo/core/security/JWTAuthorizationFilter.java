@@ -20,7 +20,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-
   private final UserService userService;
   private final JwtProperties jwtProperties;
 

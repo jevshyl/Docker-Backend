@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class UserRegisterDTO extends AbstractDTO {
-
   private String firstName;
 
   private String lastName;

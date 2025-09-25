@@ -24,7 +24,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class Role extends AbstractEntity {
-
   @Column(name = "name", nullable = false, unique = true)
   private String name;
 
@@ -38,5 +37,4 @@ public class Role extends AbstractEntity {
     this.name = name;
     this.authorities = authorities;
   }
-
 }

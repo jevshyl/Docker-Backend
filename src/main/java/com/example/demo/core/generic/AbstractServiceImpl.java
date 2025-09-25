@@ -58,6 +58,4 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity> implements A
   public boolean existsById(UUID id) {
     return repository.existsById(id);
   }
-
-
 }

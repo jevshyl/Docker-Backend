@@ -17,7 +17,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class UserDTO extends AbstractDTO {
-
   private String firstName;
 
   private String lastName;

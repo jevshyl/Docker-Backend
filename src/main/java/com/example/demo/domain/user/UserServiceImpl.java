@@ -14,7 +14,6 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl extends AbstractServiceImpl<User> implements UserService {
-
   private final PasswordEncoder passwordEncoder;
   private final RoleService roleService;
 
@@ -45,5 +44,4 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements UserSe
     user.setPassword(passwordEncoder.encode("1234"));
     return save(user);
   }
-
 }

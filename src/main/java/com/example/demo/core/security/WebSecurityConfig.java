@@ -25,7 +25,6 @@ import java.util.List;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
-
   private final UserService userService;
   private final PasswordEncoder passwordEncoder;
   private final JwtProperties jwtProperties;
@@ -72,6 +71,4 @@ public class WebSecurityConfig {
     provider.setUserDetailsService(userService);
     return new ProviderManager(provider);
   }
-
-
 }
