@@ -29,4 +29,6 @@ jobs:
             -Dsonar.organization=nypag-1
             -Dsonar.projectKey=nypag-1_uk-223
             -Dsonar.verbose=true
-            -Dsonar.token=92d1ecda325d3ff2db32d35611091f1ce7ba79b9
+            env:
+              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              
