@@ -30,9 +30,12 @@ jobs:
           distribution: temurin
           java-version: 18
 
-      - name: Build and SonarCloud Scan
+      - name: Set up Gradle 7.6
+        uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 7.6
+
+      - name: Build and SonarCloud Scan
         run: gradle build sonarqube --info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
