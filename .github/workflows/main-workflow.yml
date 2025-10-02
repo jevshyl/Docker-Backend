@@ -34,10 +34,10 @@ jobs:
       needs: sonarqube
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkoutv3
+        - uses: actions/checkoutv@3
 
         - name: Build Docker Image
-          run: docker build -t jevshyl/backend-docker-image
+          run: docker build -t jevshyl/backend-docker-image .
 
         - name: push Docker Image
           run: docker push jevshyl/backend-docker-image
