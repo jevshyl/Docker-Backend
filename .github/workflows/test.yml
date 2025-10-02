@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Grant execute permission to Gradle wrapper
+      run: chmod +x gradlew
     - name: Build and SonarCloud scan
       run: ./gradlew build sonarqube
       env:
