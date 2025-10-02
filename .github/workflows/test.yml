@@ -22,15 +22,11 @@ jobs:
   sonarqube: 
     runs-on: ubuntu--latest
     steps: 
-      - uses: actions/checkout@v4 
-      - name: Set up Gradle 7.6
-        uses: gradle/gradle-build-action@v2
+      - uses: sonarsource/sonarcloud-github-action@<action version>
         with:
-          gradle-version: 7.6
-      - name: Make Gradle Wrapper executable
-        run: chmod +x ./gradlew
-
-      - name: Build and Scan with SonarQube
-        run: ./gradlew build sonarqube
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          projectBaseDir: app/src
+          args: >
+            -Dsonar.organization=nypag-1
+            -Dsonar.projectKey=nypag-1_uk-223
+            -Dsonar.verbose=true
+            -Dsonar.token=92d1ecda325d3ff2db32d35611091f1ce7ba79b9
