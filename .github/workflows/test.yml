@@ -19,13 +19,11 @@ jobs:
             echo "Hello World"
             ./run.sh
 
-  sonarqube:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Make Gradle Wrapper executable
-      run: chmod +x ./gradlew
-    - name: Build and Scan with SonarQube
-      run: ./gradlew build sonarqube
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  sonarqube: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - uses: actions/checkout@v4 
+      - name: SonarQube test 
+        uses: sonarsource/sonarcloud-github-action@v3 
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
