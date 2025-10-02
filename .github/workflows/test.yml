@@ -1,8 +1,7 @@
-
-name: Say Hello
-
 on:
   push
+
+name: SonarQube
 
 jobs:
   build:
@@ -19,3 +18,13 @@ jobs:
           script: |
             echo "Hello World"
             ./run.sh
+
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: SonarQube test
+      uses: sonarsource/sonarcloud-github-action@<action version>
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
