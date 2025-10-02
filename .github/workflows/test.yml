@@ -15,9 +15,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 2222
-          script: |
-            echo "Hello World"
-            ./run.sh
+          script: ./deploy.sh
+          
   sonarqube: 
     runs-on: ubuntu-latest
     steps:
