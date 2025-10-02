@@ -50,3 +50,6 @@ Thumbs.db
 
 /.idea/
 /build/
+/.gradle/
+gradlew
+gradlew.bat
