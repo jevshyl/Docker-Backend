@@ -20,7 +20,7 @@ jobs:
             ./run.sh
 
   sonarqube: 
-    runs-on: ubuntu--latest
+    runs-on: ubuntu-latest
     steps: 
       - uses: sonarsource/sonarcloud-github-action@v3
         with:
