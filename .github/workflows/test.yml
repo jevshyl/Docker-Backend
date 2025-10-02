@@ -25,7 +25,9 @@ jobs:
     - uses: actions/checkout@v4
     - name: Make Gradle Wrapper executable
       run: chmod +x ./gradlew
-    - name: Build and Scan with SonarQube
-      run: ./gradlew build sonarqube
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Build and analyze
+      run: ./gradlew build sonarqube \
+          -Dsonar.projectKey=nypag-1_uk-223 \
+          -Dsonar.organization=YOUR_ORG_KEY \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
