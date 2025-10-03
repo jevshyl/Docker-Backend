@@ -41,7 +41,7 @@ jobs:
       - name: Build Docker Image
         run: docker build -t jevshyl/backend-docker-image:latest .
 
-      - name: Push Docker Imageö
+      - name: Push Docker Image
         run: docker push jevshyl/backend-docker-image:latest
 
   deploy:
